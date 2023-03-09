@@ -11,9 +11,12 @@ public class Main {
 
         //   Hash => некое число
 
+        class Car { }
+        HashMap<Car, Integer>  hashMap = new HashMap<>();
 
 
        HashMap<String,String> cities = new HashMap<>();
+
        cities.put("msk", "Moscow");
        // HASH(key) 9234583458 => msk, Moscow
        cities.put("spb", "St.Peter");
@@ -37,6 +40,7 @@ public class Main {
         }
 
         TreeMap<Integer, Person> treeMap = new TreeMap<>();
+
         treeMap.put(100, new Person("Ivan", 2000));
         treeMap.put(10, new Person("Olga", 2005));
         treeMap.put(1001, new Person("Petr", 1999));
@@ -46,6 +50,25 @@ public class Main {
         for(Map.Entry<Integer, Person> p: treeMap.entrySet()) {
             System.out.println(p.getKey() + "=> " + p.getValue().name + ", "+p.getValue().year);
         }
+        //      Фамилия         Товар   Кол-во
+        TreeMap<String, TreeMap<String, Integer>> shop = new TreeMap<>();
+        // Ivanov paper 10
+        TreeMap<String,Integer> inner = new TreeMap<>();
+        TreeMap<String,Integer> buffer = new TreeMap<>();
+        inner.put("paper", 10);
+        shop.put("Ivanov", inner);
+        // Ivanov paper 7
+        if(shop.containsKey("Ivanov")) {
+            buffer = shop.get("Ivanov"); // paper 10
+            if(buffer.containsKey("paper")) {
+                buffer.put("paper", buffer.get("paper")+7);
+            }
+            shop.put("Ivanov",buffer);
+        } else {
+            inner.put("marker", 200);
+            shop.put("Petrov",inner);
+        }
+
 
     }
 }
